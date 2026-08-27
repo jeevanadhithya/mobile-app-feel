@@ -14,7 +14,12 @@ import { Route as AddRouteImport } from './routes/add'
 import { Route as CameraRouteImport } from './routes/camera'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ProposalRouteImport } from './routes/proposal'
+import { Route as ProposalSentRouteImport } from './routes/proposal-sent'
 import { Route as ReviewRouteImport } from './routes/review'
+import { Route as LeadsIndexRouteImport } from './routes/leads.index'
+import { Route as LeadsIdRouteImport } from './routes/leads.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,9 +46,34 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProposalRoute = ProposalRouteImport.update({
+  id: '/proposal',
+  path: '/proposal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProposalSentRoute = ProposalSentRouteImport.update({
+  id: '/proposal-sent',
+  path: '/proposal-sent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReviewRoute = ReviewRouteImport.update({
   id: '/review',
   path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsIndexRoute = LeadsIndexRouteImport.update({
+  id: '/leads/',
+  path: '/leads/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsIdRoute = LeadsIdRouteImport.update({
+  id: '/leads/$id',
+  path: '/leads/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -53,7 +83,12 @@ export interface FileRoutesByFullPath {
   '/camera': typeof CameraRoute
   '/explore': typeof ExploreRoute
   '/pricing': typeof PricingRoute
+  '/profile': typeof ProfileRoute
+  '/proposal': typeof ProposalRoute
+  '/proposal-sent': typeof ProposalSentRoute
   '/review': typeof ReviewRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads/': typeof LeadsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +96,12 @@ export interface FileRoutesByTo {
   '/camera': typeof CameraRoute
   '/explore': typeof ExploreRoute
   '/pricing': typeof PricingRoute
+  '/profile': typeof ProfileRoute
+  '/proposal': typeof ProposalRoute
+  '/proposal-sent': typeof ProposalSentRoute
   '/review': typeof ReviewRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads': typeof LeadsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,15 +110,53 @@ export interface FileRoutesById {
   '/camera': typeof CameraRoute
   '/explore': typeof ExploreRoute
   '/pricing': typeof PricingRoute
+  '/profile': typeof ProfileRoute
+  '/proposal': typeof ProposalRoute
+  '/proposal-sent': typeof ProposalSentRoute
   '/review': typeof ReviewRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads/': typeof LeadsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/add' | '/camera' | '/explore' | '/pricing' | '/review'
+  fullPaths:
+    | '/'
+    | '/add'
+    | '/camera'
+    | '/explore'
+    | '/pricing'
+    | '/profile'
+    | '/proposal'
+    | '/proposal-sent'
+    | '/review'
+    | '/leads/$id'
+    | '/leads/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/add' | '/camera' | '/explore' | '/pricing' | '/review'
+  to:
+    | '/'
+    | '/add'
+    | '/camera'
+    | '/explore'
+    | '/pricing'
+    | '/profile'
+    | '/proposal'
+    | '/proposal-sent'
+    | '/review'
+    | '/leads/$id'
+    | '/leads'
   id:
-    '__root__' | '/' | '/add' | '/camera' | '/explore' | '/pricing' | '/review'
+    | '__root__'
+    | '/'
+    | '/add'
+    | '/camera'
+    | '/explore'
+    | '/pricing'
+    | '/profile'
+    | '/proposal'
+    | '/proposal-sent'
+    | '/review'
+    | '/leads/$id'
+    | '/leads/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -87,7 +165,12 @@ export interface RootRouteChildren {
   CameraRoute: typeof CameraRoute
   ExploreRoute: typeof ExploreRoute
   PricingRoute: typeof PricingRoute
+  ProfileRoute: typeof ProfileRoute
+  ProposalRoute: typeof ProposalRoute
+  ProposalSentRoute: typeof ProposalSentRoute
   ReviewRoute: typeof ReviewRoute
+  LeadsIdRoute: typeof LeadsIdRoute
+  LeadsIndexRoute: typeof LeadsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -127,11 +210,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proposal': {
+      id: '/proposal'
+      path: '/proposal'
+      fullPath: '/proposal'
+      preLoaderRoute: typeof ProposalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proposal-sent': {
+      id: '/proposal-sent'
+      path: '/proposal-sent'
+      fullPath: '/proposal-sent'
+      preLoaderRoute: typeof ProposalSentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/review': {
       id: '/review'
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads/': {
+      id: '/leads/'
+      path: '/leads'
+      fullPath: '/leads/'
+      preLoaderRoute: typeof LeadsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads/$id': {
+      id: '/leads/$id'
+      path: '/leads/$id'
+      fullPath: '/leads/$id'
+      preLoaderRoute: typeof LeadsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -143,7 +261,12 @@ const rootRouteChildren: RootRouteChildren = {
   CameraRoute: CameraRoute,
   ExploreRoute: ExploreRoute,
   PricingRoute: PricingRoute,
+  ProfileRoute: ProfileRoute,
+  ProposalRoute: ProposalRoute,
+  ProposalSentRoute: ProposalSentRoute,
   ReviewRoute: ReviewRoute,
+  LeadsIdRoute: LeadsIdRoute,
+  LeadsIndexRoute: LeadsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
