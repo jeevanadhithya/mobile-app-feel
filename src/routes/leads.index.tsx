@@ -23,7 +23,8 @@ export const Route = createFileRoute("/leads/")({
 });
 
 function Leads() {
-  const [featured, ...rest] = opportunities;
+  const featured = opportunities[0]!;
+  const rest = opportunities.slice(1);
 
   return (
     <PhoneFrame>
